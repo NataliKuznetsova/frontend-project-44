@@ -8,16 +8,16 @@ export default function PlayGame()
     {
         let start = Math.floor(Math.random() * 20) + 1;
         let step = Math.floor(Math.random() * 5) + 1;
-        let nap = Math.floor(Math.random() * 10) + 1;
+        let gap = Math.floor(Math.random() * 10) + 1;
         let exp = '';
         let actual = start;
 
         for(let i = 0; i < 10; i++)
         {  
-            if(i === nap)
+            if(i === gap)
             {
                 result.push(actual.toString())
-                exp = exp + '.. ';
+                exp = exp + '..';
             }
             else
             {
