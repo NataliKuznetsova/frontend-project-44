@@ -9,7 +9,7 @@ export default function AppGames(question, expression, rightAnswer)
     let countCorrectAnswer = 0;
     for(let i = 0; i < 3; i++)
     {
-        console.log("Question, " + expression[i]);
+        console.log("Question: " + expression[i]);
         const answer = readlineSync.question('Your answer: ');
         if(rightAnswer[i] === answer)
         {
