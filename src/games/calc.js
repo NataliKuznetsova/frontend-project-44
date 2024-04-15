@@ -1,27 +1,26 @@
-import AppGames from '../index.js';
+import appGames from '../index.js';
+import getRandom from '../helper.js';
 
-export default function Calc() {
-  const expressions = [];
-  const result = [];
-  for (let i = 0; i < 3; i += 1) {
-    const a = Math.floor(Math.random() * 10) + 1;
-    const b = Math.floor(Math.random() * 10) + 1;
-    const op = ['*', '+', '-'][Math.floor(Math.random() * 3)];
-    expressions.push(`${a} ${op} ${b}`);
-    switch (op) {
-      case '*':
-        result.push((a * b).toString());
-        break;
-      case '+':
-        result.push((a + b).toString());
-        break;
-      case '-':
-        result.push((a - b).toString());
-        break;
-      default:
-        result.push((0).toString());
-    }
+const calculateResult = (numOne, numTwo, operator) => {
+  switch (operator) {
+    case '*':
+      return (numOne * numTwo).toString();
+    case '+':
+      return (numOne + numTwo).toString();
+    case '-':
+      return (numOne - numTwo).toString();
+    default:
+      return (0).toString();
   }
+};
 
-  AppGames('What is the result of the expression?', expressions, result);
-}
+const runGame = () => {
+  const numOne = getRandom(1, 10);
+  const numTwo = getRandom(1, 10);
+  const op = ['*', '+', '-'][getRandom(0, 3)];
+  return [`${numOne} ${op} ${numTwo}`, calculateResult(numOne, numTwo, op)];
+};
+
+export default () => {
+  appGames('What is the result of the expression?', runGame);
+};

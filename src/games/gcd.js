@@ -1,23 +1,22 @@
-import AppGames from '../index.js';
+import appGames from '../index.js';
+import getRandom from '../helper.js';
 
-export default function PlayGame() {
-  const expressions = [];
-  const result = [];
-  for (let i = 0; i < 3; i += 1) {
-    let m = Math.floor(Math.random() * 20) + 1;
-    let n = Math.floor(Math.random() * 20) + 1;
-    expressions.push(`${m} ${n}`);
+const runGame = () => {
+  let m = getRandom(1, 20);
+  let n = getRandom(1, 20);
+  const expression = `${m} ${n}`;
 
-    while (m !== 0 && n !== 0) {
-      if (m > n) {
-        m %= n;
-      } else {
-        n %= m;
-      }
+  while (m !== 0 && n !== 0) {
+    if (m > n) {
+      m %= n;
+    } else {
+      n %= m;
     }
-
-    result.push((m + n).toString());
   }
 
-  AppGames('Find the greatest common divisor of given numbers.', expressions, result);
-}
+  return [expression, (m + n).toString()];
+};
+
+export default () => {
+  appGames('Find the greatest common divisor of given numbers.', runGame);
+};

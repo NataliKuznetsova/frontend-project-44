@@ -1,4 +1,5 @@
-import AppGames from '../index.js';
+import appGames from '../index.js';
+import getRandom from '../helper.js';
 
 const isPrime = (num) => {
   for (let i = 2; i < num; i += 1) {
@@ -10,13 +11,13 @@ const isPrime = (num) => {
   return 'yes';
 };
 
-export default function PlayGame() {
-  const expressions = [];
-  const result = [];
-  for (let i = 0; i < 3; i += 1) {
-    const num = Math.floor(Math.random() * 5) + 2;
-    expressions.push(num);
-    result.push(isPrime(num));
-  }
-  AppGames('Answer "yes" if given number is prime. Otherwise answer "no".', expressions, result);
-}
+const runGame = () => {
+  const num = getRandom(2, 5);
+  const result = isPrime(num);
+
+  return [String(num), result];
+};
+
+export default () => {
+  appGames('Answer "yes" if given number is prime. Otherwise answer "no".', runGame);
+};

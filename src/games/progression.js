@@ -1,27 +1,28 @@
-import AppGames from '../index.js';
+import appGames from '../index.js';
+import getRandom from '../helper.js';
 
-export default function PlayGame() {
-  const expressions = [];
-  const result = [];
-  for (let i = 0; i < 3; i += 1) {
-    const start = Math.floor(Math.random() * 20) + 1;
-    const step = Math.floor(Math.random() * 5) + 1;
-    const gap = Math.floor(Math.random() * 9) + 1;
-    const exp = [];
-    let actual = start;
+const runGame = () => {
+  const start = getRandom(1, 20);
+  const step = getRandom(1, 6);
+  const gap = getRandom(1, 9);
+  const exp = [];
+  let actual = start;
+  let result = '';
 
-    for (let j = 0; j < 10; j += 1) {
-      if (j === gap) {
-        result.push(actual.toString());
-        exp.push('..');
-      } else {
-        exp.push(actual);
-      }
-
-      actual += step;
+  for (let i = 0; i < 10; i += 1) {
+    if (i === gap) {
+      result = actual.toString();
+      exp.push('..');
+    } else {
+      exp.push(actual);
     }
-    expressions.push(exp.join(' '));
+
+    actual += step;
   }
 
-  AppGames('What number is missing in the progression?', expressions, result);
-}
+  return [exp.join(' '), result];
+};
+
+export default () => {
+  appGames('What number is missing in the progression?', runGame);
+};
